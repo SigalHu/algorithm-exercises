@@ -352,7 +352,7 @@ public class Sort {
             return array;
         }
 
-        for (int step = array.length / 2; step > 0; step /= 2) {
+        for (int step = array.length >>> 1; step > 0; step >>>= 1) {
             for (int ii = step, jj; ii < array.length; ii++) {
                 T tmp = array[ii];
                 for (jj = ii - step; jj >= 0 && tmp.compareTo(array[jj]) < 0; jj -= step) {
@@ -429,7 +429,7 @@ public class Sort {
         if (array[mid].compareTo(array[mid + 1]) <= 0) {
             return;
         }
-        List<T> list = new ArrayList<T>(end - start + 1);
+        List<T> list = new ArrayList<>(end - start + 1);
         int ii = start, jj = mid + 1;
         while (ii <= mid && jj <= end) {
             if (array[ii].compareTo(array[jj]) <= 0) {

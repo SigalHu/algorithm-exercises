@@ -1,5 +1,7 @@
 package com.sigalhu.ae.structure.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.function.Consumer;
 
 /**
@@ -20,13 +22,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private void addNode(Node root, Node node) {
         if (root.compareTo(node) > 0) {
-            if (root.left == null) {
+            if (!root.hasLeft()) {
                 root.left = node;
             } else {
                 addNode(root.left, node);
             }
         } else if (root.compareTo(node) < 0) {
-            if (root.right == null) {
+            if (!root.hasRight()) {
                 root.right = node;
             } else {
                 addNode(root.right, node);
@@ -91,6 +93,30 @@ public class BinarySearchTree<T extends Comparable<T>> {
         consumer.accept(node.value);
     }
 
+    /**
+     * 广度优先遍历
+     *
+     * @param consumer
+     */
+    public void breadthFirstTraversal(Consumer<T> consumer) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        Node node;
+        while ((node = queue.poll()) != null) {
+            consumer.accept(node.value);
+            if (node.hasLeft()) {
+                queue.offer(node.left);
+            }
+            if (node.hasRight()) {
+                queue.offer(node.right);
+            }
+        }
+    }
+
+    public void depthFirstTraversal(Consumer<T> consumer) {
+        preorderTraversal(consumer);
+    }
+
     protected class Node implements Comparable<Node> {
         private T value;
         private Node left;
@@ -98,6 +124,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         public Node(T value) {
             this.value = value;
+        }
+
+        public boolean hasLeft() {
+            return left != null;
+        }
+
+        public boolean hasRight() {
+            return right != null;
         }
 
         @Override
