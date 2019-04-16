@@ -9,14 +9,14 @@ public class ArrayUtils {
         return array == null || array.length == 0;
     }
 
-    public static <T> T[] swap(T[] array, int a, int b) {
-        if (a == b) {
+    public static <T> T[] swap(T[] array, int fromIndex, int toIndex) {
+        if (fromIndex == toIndex) {
             return array;
         }
 
-        T tmp = array[a];
-        array[a] = array[b];
-        array[b] = tmp;
+        T tmp = array[fromIndex];
+        array[fromIndex] = array[toIndex];
+        array[toIndex] = tmp;
         return array;
     }
 
