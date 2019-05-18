@@ -1,7 +1,7 @@
 package com.sigalhu.ae.leetcode.p3;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author huxujun
@@ -10,20 +10,21 @@ import java.util.Set;
 public class Solution {
 
     public int lengthOfLongestSubstring(String s) {
-        Set<Character> set = new HashSet<>(s.length());
-        int maxLen = 0;
-        for (int left = 0, right = 0; right < s.length(); right++) {
-            if (!set.contains(s.charAt(right))) {
-                set.add(s.charAt(right));
+        Map<Character, Integer> map = new HashMap<>(s.length());
+        int maxLen = 0, left = 0, right = 0;
+        while (right < s.length()) {
+            if (!map.containsKey(s.charAt(right)) || map.get(s.charAt(right)) < left) {
+                map.put(s.charAt(right), right++);
                 continue;
             }
-            maxLen = Math.max(maxLen, set.size());
-            while (s.charAt(left) != s.charAt(right)) {
-                set.remove(s.charAt(left++));
-            }
-            set.remove(s.charAt(left++));
-            set.add(s.charAt(right));
+            maxLen = Math.max(maxLen, right - left);
+            left = map.get(s.charAt(right)) + 1;
+            map.put(s.charAt(right), right++);
         }
-        return Math.max(maxLen, set.size());
+        return Math.max(maxLen, right - left);
+    }
+
+    public static void main(String[] args) {
+        System.err.println(new Solution().lengthOfLongestSubstring("abba"));
     }
 }
