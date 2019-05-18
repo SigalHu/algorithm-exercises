@@ -23,8 +23,4 @@ public class Solution {
         }
         return Math.max(maxLen, right - left);
     }
-
-    public static void main(String[] args) {
-        System.err.println(new Solution().lengthOfLongestSubstring("abba"));
-    }
 }
