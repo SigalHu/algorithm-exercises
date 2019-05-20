@@ -10,7 +10,7 @@ public class Solution {
         if (numRows == 1) {
             return s;
         }
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(s.length());
         int step = numRows + (numRows - 2), m;
         for (int i = 0; i < numRows; i++) {
             for (int j = i; j < s.length(); j += step) {
