@@ -12,3 +12,4 @@
 | 6 | [Z 字形变换](src/main/java/com/sigalhu/ae/leetcode/p6/problem.md) | [解析](src/main/java/com/sigalhu/ae/leetcode/p6/article.md) | 中等 |
 | 7 | [整数反转](src/main/java/com/sigalhu/ae/leetcode/p7/problem.md) | [解析](src/main/java/com/sigalhu/ae/leetcode/p7/article.md) | 简单 |
 | 8 | [字符串转换整数 (atoi)](src/main/java/com/sigalhu/ae/leetcode/p8/problem.md) | | 中等 |
+| 9 | [回文数](src/main/java/com/sigalhu/ae/leetcode/p9/problem.md) | [解析](src/main/java/com/sigalhu/ae/leetcode/p9/article.md) | 简单 |
