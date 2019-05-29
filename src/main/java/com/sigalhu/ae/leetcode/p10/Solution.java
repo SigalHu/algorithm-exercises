@@ -10,39 +10,20 @@ public class Solution {
         if (s == null || p == null) {
             return false;
         }
-        return isMatch(s, p, 0, 0);
-    }
-
-    private boolean isMatch(String s, String p, int ss, int pp) {
-        while (ss < s.length() && pp < p.length()) {
-            if (pp + 1 < p.length() && p.charAt(pp + 1) == '*') {
-                break;
-            } else if (s.charAt(ss) == p.charAt(pp) || p.charAt(pp) == '.') {
-                ss++;
-                pp++;
-            } else {
-                return false;
+        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+        dp[s.length()][p.length()] = true;
+        for (int pp = p.length() - 1; pp >= 0; --pp) {
+            dp[s.length()][pp] = pp + 1 < p.length() && p.charAt(pp + 1) == '*' && dp[s.length()][pp + 2];
+        }
+        boolean match;
+        for (int ss = s.length() - 1; ss >= 0; --ss) {
+            for (int pp = p.length() - 1; pp >= 0; --pp) {
+                match = s.charAt(ss) == p.charAt(pp) || p.charAt(pp) == '.';
+                dp[ss][pp] = (pp + 1 < p.length() && p.charAt(pp + 1) == '*') ?
+                        (dp[ss][pp + 2] || (match && dp[ss + 1][pp])) :
+                        match && dp[ss + 1][pp + 1];
             }
         }
-        if (ss == s.length() || pp == p.length()) {
-            while (pp + 1 < p.length() && p.charAt(pp + 1) == '*') {
-                pp += 2;
-            }
-            return ss == s.length() && pp == p.length();
-        }
-        if (p.charAt(pp) == '.') {
-            while (ss < s.length()) {
-                if (isMatch(s, p, ss++, pp + 2)) {
-                    return true;
-                }
-            }
-            return isMatch(s, p, ss, pp + 2);
-        }
-        while (ss < s.length() && s.charAt(ss) == p.charAt(pp)) {
-            if (isMatch(s, p, ss++, pp + 2)) {
-                return true;
-            }
-        }
-        return isMatch(s, p, ss, pp + 2);
+        return dp[0][0];
     }
 }
