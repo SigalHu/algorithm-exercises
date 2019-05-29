@@ -10,33 +10,13 @@ public class Solution {
         if (s == null || p == null) {
             return false;
         }
-        int ss = 0, pp = 0;
+        return isMatch(s, p, 0, 0);
+    }
+
+    private boolean isMatch(String s, String p, int ss, int pp) {
         while (ss < s.length() && pp < p.length()) {
             if (pp + 1 < p.length() && p.charAt(pp + 1) == '*') {
-                if (s.charAt(ss) == p.charAt(pp)) {
-                    int sstmp = ss + 1, pptmp = pp + 2;
-                    while (sstmp < s.length() && s.charAt(sstmp) == s.charAt(ss)) {
-                        sstmp++;
-                    }
-                    while (pptmp < p.length() && p.charAt(pptmp) == p.charAt(pp)) {
-                        pptmp++;
-                    }
-                    if (sstmp - ss >= pptmp - pp - 1) {
-                        ss = sstmp;
-                        pp = pptmp;
-                    } else {
-                        return false;
-                    }
-                } else if (p.charAt(pp) == '.') {
-                    if ((pp += 2) == p.length()) {
-                        return true;
-                    }
-                    while (ss < s.length() && s.charAt(ss) != p.charAt(pp)) {
-                        ss++;
-                    }
-                } else {
-                    pp += 2;
-                }
+                break;
             } else if (s.charAt(ss) == p.charAt(pp) || p.charAt(pp) == '.') {
                 ss++;
                 pp++;
@@ -44,10 +24,25 @@ public class Solution {
                 return false;
             }
         }
-        return ss == s.length() && pp == p.length();
-    }
-
-    public static void main(String[] args) {
-        System.err.println(new Solution().isMatch("aaa", "ab*a*c*a"));
+        if (ss == s.length() || pp == p.length()) {
+            while (pp + 1 < p.length() && p.charAt(pp + 1) == '*') {
+                pp += 2;
+            }
+            return ss == s.length() && pp == p.length();
+        }
+        if (p.charAt(pp) == '.') {
+            while (ss < s.length()) {
+                if (isMatch(s, p, ss++, pp + 2)) {
+                    return true;
+                }
+            }
+            return isMatch(s, p, ss, pp + 2);
+        }
+        while (ss < s.length() && s.charAt(ss) == p.charAt(pp)) {
+            if (isMatch(s, p, ss++, pp + 2)) {
+                return true;
+            }
+        }
+        return isMatch(s, p, ss, pp + 2);
     }
 }
