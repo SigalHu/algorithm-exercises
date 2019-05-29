@@ -13,3 +13,4 @@
 | 7 | [整数反转](src/main/java/com/sigalhu/ae/leetcode/p7/problem.md) | [解析](src/main/java/com/sigalhu/ae/leetcode/p7/article.md) | 简单 |
 | 8 | [字符串转换整数 (atoi)](src/main/java/com/sigalhu/ae/leetcode/p8/problem.md) | | 中等 |
 | 9 | [回文数](src/main/java/com/sigalhu/ae/leetcode/p9/problem.md) | [解析](src/main/java/com/sigalhu/ae/leetcode/p9/article.md) | 简单 |
+| 10 | [正则表达式匹配](src/main/java/com/sigalhu/ae/leetcode/p10/problem.md) | [解析](src/main/java/com/sigalhu/ae/leetcode/p10/article.md) | 困难 |
